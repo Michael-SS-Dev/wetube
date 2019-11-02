@@ -5,6 +5,10 @@
   "main": "index.js",
   "author": "Myeong Jin Ko",
   "dependencies": {
+    "@babel/node": "^7.6.3",
     "express": "^4.17.1"
+  },
+  "scripts": {
+    "start": "node index.js"
   }
 }
