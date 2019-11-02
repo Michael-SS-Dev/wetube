@@ -1,0 +1,10 @@
+{
+  "name": "wetube",
+  "version": "1.0.0",
+  "description": "Youtube clone using Vanilla js",
+  "main": "index.js",
+  "author": "Myeong Jin Ko",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
