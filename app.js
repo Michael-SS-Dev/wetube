@@ -1,10 +1,10 @@
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import express from "express";
-import globalRouter from "./routers/globalRouter";
 import helmet from "helmet";
-import { localsMiddleware } from "./middlewares";
 import logger from "morgan";
+import globalRouter from "./routers/globalRouter";
+import { localsMiddleware } from "./middlewares";
 import routes from "./routes";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
