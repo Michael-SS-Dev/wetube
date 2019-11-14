@@ -15,6 +15,7 @@ app.use(helmet());
 app.set("view engine", "pug");
 // express가 해당하는 경로의 파일들을 서치하게 해줌
 app.use("/uploads", express.static("uploads"));
+app.use("/static", express.static("static"));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

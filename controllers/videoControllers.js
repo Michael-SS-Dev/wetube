@@ -1,3 +1,5 @@
+// Node JS 기본 라이브러리
+import fs from "fs";
 import routes from "../routes";
 import Video from "../models/Video";
 // render 함수의 첫번째 인자는 템플릿이고, 두번째 인자는
@@ -24,7 +26,7 @@ export const search = async (req, res) => {
   } = req;
   let videos = [];
   try {
-    // 정규식 사용
+    // 정규식 사용 regrex에 대해서는 참조
     videos = await Video.find({
       title: { $regex: searchingBy, $options: "i" }
     });
@@ -65,7 +67,6 @@ export const videoDetail = async (req, res) => {
     console.log(error);
     res.redirect(routes.home);
   }
-  console.log(video);
   res.render("videoDetail", { pageTitle: "Video Detail" });
 };
 
@@ -79,7 +80,9 @@ export const getEditVideo = async (req, res) => {
       pageTitle: `Edit ${video.title} `,
       video
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 
   res.render("editVideo", { pageTitle: "Edit Video" });
 };
@@ -104,12 +107,16 @@ export const deleteVideo = async (req, res) => {
   try {
     // id가 id인걸 찾아서 formd의 title, descrption으로 업데이트해라
     console.log("✅  start");
-    await fs.remove(`../uploads/videos/${id}`);
+    console.log("❌  delete video");
+    // fs를 통해 로컬에 저장되어있는 파일경로도 함께 삭제
+    const video = await Video.findById(id);
+    console.log(video.fileUrl);
+    await fs.unlinkSync(video.fileUrl);
+    // DB에서 해당 id를 가진 ROW 삭제
     await Video.findOneAndRemove({ _id: id });
     console.log("✅ end");
   } catch (error) {
     console.log(error);
   }
-
   res.redirect(routes.home);
 };
